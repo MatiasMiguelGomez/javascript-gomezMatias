@@ -87,8 +87,8 @@ else{
     }
 }
 console.log("Información recopilada:");
-console.log(nombre);
-console.log(edad);
-console.log(eleccion);
-console.log(añoNacimiento);
-console.log(artistasRelacionados);
+console.log(`Nombre: ${nombre}`);
+console.log(`Edad: ${edad} años`);
+console.log(`Elegiste: ${eleccion}`);
+console.log(`Fecha de nacimiento: Año ${añoNacimiento}`);
+console.log(`Artistas que te pueden interesar: ${artistasRelacionados}`);
