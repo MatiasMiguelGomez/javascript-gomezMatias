@@ -6,7 +6,15 @@ let artistasRelacionados;
 
 function recopilacionInfo(){ /*Esto es declararla, no invocarla*/
     nombre = prompt("Ingrese su nombre");
+    while(nombre === ""){
+        alert("no puedes dejar este campo vacio, por favor coloque un nombre");
+        nombre = prompt("Ingrese su nombre");
+    }
     edad = Number(prompt("Ingrese su edad"));
+    while(edad === 0 || edad > 120){
+        alert("¿esta seguro que tiene esa edad? por favor corrobore que puso un numero del 1 al 120")
+        edad = Number(prompt("Ingrese su edad"));
+    }
     añoNacimiento = (2023 - edad);
     eleccion = prompt("Elige entre música, pintura o cine").toLowerCase();
 
