@@ -1,102 +1,116 @@
-let nombre;
+const libreria = [];
+const usuarios = [];
+const sorteoSemanal = [];
+
+class IngresoLibro {
+  constructor(nombreLibro, fechaPublicacion, autor) {
+    this.id = libreria.length + 1;
+    this.nombreLibro = nombreLibro;
+    this.fechaPublicacion = fechaPublicacion;
+    this.autor = autor;
+    this.disponible = true;
+  }
+
+  agregarLibreria() {
+    libreria.push(this);
+    console.log(`El libro ${this.nombreLibro} se agrego correctamente.`)
+  }
+
+  marcarNoDisponible() {
+    this.disponibilidad = false;
+    console.log(`${this.nombreLibro} ya no estara disponible.`)
+  }
+}
+
+class IngresoUsuarios {
+  constructor(nombreUsuario, edad, documento) {
+    this.id = usuarios.length + 1;
+    this.nombreUsuario = nombreUsuario;
+    this.edad = edad;
+    this.documento = documento;
+  }
+
+  agregarUsuario() {
+    usuarios.push(this);
+    console.log(`Bienvenido ${this.nombreUsuario}, ahora eres parte de nuestra comunidad.`)
+  }
+}
+
+let nombreUsuario;
 let edad;
-let eleccion;
-let añoNacimiento;
-let artistasRelacionados;
+let documento;
+let nombreLibro;
+let fechaPublicacion;
+let autor;
+let cantidadLibros;
+let cantidadUsuarios;
 
-function recopilacionInfo(){ /*Esto es declararla, no invocarla*/
-    nombre = prompt("Ingrese su nombre");
-    while(nombre === ""){
-        alert("no puedes dejar este campo vacio, por favor coloque un nombre");
-        nombre = prompt("Ingrese su nombre");
-    }
-    edad = Number(prompt("Ingrese su edad"));
-    while(edad === 0 || edad > 120){
-        alert("¿esta seguro que tiene esa edad? por favor corrobore que puso un numero del 1 al 120")
-        edad = Number(prompt("Ingrese su edad"));
-    }
-    añoNacimiento = (2023 - edad);
-    eleccion = prompt("Elige entre música, pintura o cine").toLowerCase();
-
-    while(!(eleccion==="musica" || eleccion==="pintura" || eleccion==="cine")){
-        alert("por favor elija una opción valida");
-        eleccion = prompt("elija entre música pintura o cine");
-    }
-}
-recopilacionInfo(); /* Tenes que invocarla antes de los condicionales, sino primero te lee los condicionales
-y siempre van a ser undefined, por ende siempre van al else  final*/ 
-
-if(eleccion==="musica"){
-    if(añoNacimiento <= 2023 && añoNacimiento > 2010){
-        artistasRelacionados="The Weekend, Taylor Swift, Bad Bunny."
-        console.log(`${nombre} te recomendamos estos 3 artistas que te pueden interesar: ${artistasRelacionados}`);
-    }
-    else if(añoNacimiento <= 2010 && añoNacimiento > 2000){
-        artistasRelacionados="Britney Spears, Jennifer López, Katy Perry."
-        console.log(`${nombre} te recomendamos estos 3 artistas que te pueden interesar: ${artistasRelacionados}`);
-    }
-    else if(añoNacimiento <= 2000 && añoNacimiento > 1990){  
-        artistasRelacionados="BackStreet Boys, NSync, Spice Girls."
-        console.log(`${nombre} te recomendamos estos 3 artistas que te pueden interesar: ${artistasRelacionados}`);
-    }
-    else if(añoNacimiento <= 1990 && añoNacimiento > 1980){
-        artistasRelacionados="Madonna,  Guns N' Roses, Depeche Mode."
-        console.log(`${nombre} te recomendamos estos 3 artistas que te pueden interesar: ${artistasRelacionados}`);
-    }
-    else{
-        artistasRelacionados="Freddie Mercury, David Bowie, Led Zeppelin."
-        console.log(`${nombre} te recomendamos estos 3 artistas que te pueden interesar: ${artistasRelacionados}`);
-    }
+cantidadLibros = prompt(`Ingrese la cantidad de libros que desea agregar.`);
+while (isNaN(cantidadLibros) || cantidadLibros < 0) {
+  alert(`Usted no ingreso un numero valido.`);
+  cantidadLibros = prompt(`Ingrese la cantidad de libros que desea agregar.`);
 }
 
-else if(eleccion==="pintura"){
-    if(añoNacimiento <= 2023 && añoNacimiento > 2010){
-        artistasRelacionados="Yayoi Kusama, Infinity Mirrored Room."
-        console.log(`${nombre} te recomendamos el cuadro mas significativo de la decada del 2010: ${artistasRelacionados}`);
-    }
-    else if(añoNacimiento <= 2010 && añoNacimiento > 2000){
-        artistasRelacionados="Jean Ranger y Bill Sullivan, The Fabric of Reality."
-        console.log(`${nombre} te recomendamos el cuadro mas significativo de la decada del 2000: ${artistasRelacionados}`);
-    }
-    else if(añoNacimiento <= 2000 && añoNacimiento > 1990){  
-        artistasRelacionados="Omar Schiliro, Batato te entiendo."
-        console.log(`${nombre} te recomendamos el cuadro mas significativo de la decada de los 90: ${artistasRelacionados}`);
-    }
-    else if(añoNacimiento <= 1990 && añoNacimiento > 1980){
-        artistasRelacionados="Nancy Spero. Fleeing Woman and Child, Irradiated."
-        console.log(`${nombre} te recomendamos el cuadro mas significativo de la decada de los 80: ${artistasRelacionados}`);
-    }
-    else{
-        artistasRelacionados="Arnulf Rainer. Face Farces."
-        console.log(`${nombre} te recomendamos el cuadro mas significativo de la decada de los 70: ${artistasRelacionados}`);
-    }
+for (let i = 0; i < cantidadLibros; i++) {
+  nombreLibro = prompt(`Ingrese el nombre del libro.`);
+  fechaPublicacion = prompt(`ingrese la fecha de publicacion del libro.`)
+  while (isNaN(fechaPublicacion)) {
+    alert(`Usted no ingreso un numero valido.`);
+    fechaPublicacion = prompt(`Ingrese la cantidad de libros que desea agregar.`);
+  }
+  autor = prompt(`Ingrese el autor del libro.`);
+
+  const libro = new IngresoLibro(nombreLibro, fechaPublicacion, autor);
+  libro.agregarLibreria();
 }
 
-else{
-    if(añoNacimiento <= 2023 && añoNacimiento > 2010){
-        artistasRelacionados="Toy Story 3."
-        console.log(`${nombre} te recomendamos la pelicula mas taquillera de la decada del 2010: ${artistasRelacionados}`);
-    }
-    else if(añoNacimiento <= 2010 && añoNacimiento > 2000){
-        artistasRelacionados="Misión imposible 2."
-        console.log(`${nombre} te recomendamos la pelicula mas taquillera de la decada de los 2000: ${artistasRelacionados}`);
-    }
-    else if(añoNacimiento <= 2000 && añoNacimiento > 1990){  
-        artistasRelacionados="Ghost."
-        console.log(`${nombre} te recomendamos la pelicula mas taquillera de la decada de los 90: ${artistasRelacionados}`);
-    }
-    else if(añoNacimiento <= 1990 && añoNacimiento > 1980){
-        artistasRelacionados="Star Wars: Episode V - The Empire Strikes Back."
-        console.log(`${nombre} te recomendamos la pelicula mas taquillera de la decada de los 80: ${artistasRelacionados}`);
-    }
-    else{
-        artistasRelacionados="The Godfather."
-        console.log(`Te recomendamos la pelicula mas taquillera de la decada de los 70: ${artistasRelacionados}`);
-    }
+cantidadUsuarios = prompt(`Ingrese la cantidad de usuarios que desea agregar.`);
+while (isNaN(cantidadUsuarios)) {
+  alert(`Usted no ingreso un numero valido.`);
+  cantidadUsuarios = prompt(`Ingrese la cantidad de usuarios que desea agregar.`);
 }
-console.log("Información recopilada:");
-console.log(`Nombre: ${nombre}`);
-console.log(`Edad: ${edad} años`);
-console.log(`Elegiste: ${eleccion}`);
-console.log(`Fecha de nacimiento: Año ${añoNacimiento}`);
-console.log(`Artistas que te pueden interesar: ${artistasRelacionados}`);
+
+for (let i = 0; i < cantidadUsuarios; i++) {
+  nombreUsuario = prompt(`Ingrese el nombre del usuario.`);
+  edad = prompt(`Ingrese la edad del usuario.`);
+  while (isNaN(edad)) {
+    alert(`Usted no ingreso un numero valido.`);
+    edad = prompt(`Ingrese la edad del usuario.`);
+  }
+  documento = prompt(`Ingrese el numero de documento del usuario.`);
+  while (isNaN(documento)) {
+    alert(`Usted no ingreso un numero valido.`);
+    documento = prompt(`Ingrese el numero de documento.`);
+  }
+
+  const usuario = new IngresoUsuarios(nombreUsuario, edad, documento);
+  usuario.agregarUsuario();
+}
+
+
+
+alert(`A continuacion se hara un sorteo de 3 libros para los usuarios, donde podrán tener el libro 15 dias habiles tras el sorteo.
+Para este sorteo solo participaran los usuarios mayores de edad.`);
+
+const usuariosMayores = usuarios.filter(usuarios => usuarios.edad >= 18);
+
+while (sorteoSemanal.length < 3) {
+  let premio = Math.floor(Math.random() * libreria.length);
+  let ganador = Math.floor(Math.random() * usuariosMayores.length);
+
+  if (premio < libreria.length && ganador < usuariosMayores.length) {
+    if (libreria[premio].disponible === true) {
+      libreria[premio]. marcarNoDisponible();
+
+      const premioDescripcion = [{premio:libreria[premio]},{ganador:usuariosMayores[ganador]}];
+      sorteoSemanal.push(premioDescripcion);
+    }
+  }
+}
+
+sorteoSemanal.forEach(elemento => {
+  console.log(elemento)
+});
+console.log(sorteoSemanal);
+console.log(libreria);
+console.log(usuarios);
