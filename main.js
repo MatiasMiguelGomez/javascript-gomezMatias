@@ -87,30 +87,33 @@ for (let i = 0; i < cantidadUsuarios; i++) {
   usuario.agregarUsuario();
 }
 
-
-
 alert(`A continuacion se hara un sorteo de 3 libros para los usuarios, donde podrán tener el libro 15 dias habiles tras el sorteo.
 Para este sorteo solo participaran los usuarios mayores de edad.`);
 
-const usuariosMayores = usuarios.filter(usuarios => usuarios.edad >= 18);
+const sorteo = () => {
+  let numeroGanador = Math.floor(Math.random() * usuarios.length);
+  let numeroPremio = Math.floor(Math.random() * libreria.length);
 
-while (sorteoSemanal.length < 3) {
-  let premio = Math.floor(Math.random() * libreria.length);
-  let ganador = Math.floor(Math.random() * usuariosMayores.length);
+  let ganador = usuarios[numeroGanador].nombreUsuario;
+  let premio = libreria[numeroPremio].nombreLibro;
 
-  if (premio < libreria.length && ganador < usuariosMayores.length) {
-    if (libreria[premio].disponible === true) {
-      libreria[premio]. marcarNoDisponible();
-
-      const premioDescripcion = [{premio:libreria[premio]},{ganador:usuariosMayores[ganador]}];
-      sorteoSemanal.push(premioDescripcion);
-    }
+  while (sorteoSemanal.some(sorteo => sorteo.ganador === ganador && sorteo.premio === premio)) {
+    numeroGanador = Math.floor(Math.random() * usuarios.length);
+    numeroPremio = Math.floor(Math.random() * libreria.length);
+    ganador = usuarios[numeroGanador].nombreUsuario;
+    premio = libreria[numeroPremio].nombreLibro;
   }
+
+  sorteoSemanal.push({ganador, premio});
+
+  console.log(`Ganador: ${ganador} Premio: ${premio}`);
 }
 
-sorteoSemanal.forEach(elemento => {
-  console.log(elemento)
-});
-console.log(sorteoSemanal);
+for(let i = 0; i < 3; i++){
+  sorteo();
+}
+
 console.log(libreria);
 console.log(usuarios);
+console.log(sorteoSemanal);
+
